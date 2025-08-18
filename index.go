@@ -97,4 +97,21 @@ func main() {
 	}
 
 	fmt.Println(student)
+	test("lagger", 11, 2, 0, 4, 5, 0, 6, 10, 7, 9)
+	fmt.Println()
+	getAllNames("lagger", "Rahul", "aman")
+}
+
+func test(name string, numbers ...int) {
+	fmt.Println(name, numbers)
+	for num := range numbers {
+		fmt.Print(numbers[num], ",")
+	}
+}
+
+func getAllNames(names ...string) {
+	fmt.Println(names)
+	for name := range names {
+		fmt.Print(names[name], ",")
+	}
 }
