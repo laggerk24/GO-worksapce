@@ -16,6 +16,12 @@ type Person struct {
 	address string
 }
 
+type Employee struct {
+	person        Person
+	id            string
+	officeAddress string
+}
+
 func main() {
 	ripeFruit := "Ripe Fruit"
 	fmt.Println(Rawfruit)
@@ -65,4 +71,16 @@ func main() {
 	object.salary = 9000000
 	object.address = "Hyderabad"
 	fmt.Println("Hello my name is", object.name, "living in", object.address, "with salary of", object.salary)
+
+	emp := Employee{
+		person: Person{
+			name:    "Rahul",
+			salary:  900000000,
+			address: "Hyderabad",
+		},
+		id:            "BH10572",
+		officeAddress: "Hyderabad",
+	}
+
+	fmt.Println(emp)
 }
