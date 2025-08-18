@@ -30,13 +30,27 @@ func main() {
 	// arrays
 	var arr1 = [6]int{1, 2, 3, 4, 5}
 	arr1[0] = 69
-	fmt.Println(arr1)
+	fmt.Println("Arrays")
+	for num := range arr1 {
+		fmt.Print(num)
+		fmt.Print(",")
+	}
 	// slices
-	var arr2 = []int{1, 2, 3, 4, 5}
+	var arr2 = []int{8, 9, 10, 11, 12}
 	fmt.Println(arr2[:4])
 	fmt.Println(arr2[2:4])
 	fmt.Println(arr2[3:])
 
-	
+	var userData = map[string]int{
+		"lagger": 24,
+		"rahul":  22,
+	}
+	userData["ram"] = 23
+	fmt.Println(userData["sam"])
 
+	for key, value := range userData {
+		fmt.Println(key + " ")
+		fmt.Print(value)
+		fmt.Println()
+	}
 }
