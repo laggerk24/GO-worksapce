@@ -66,6 +66,8 @@ func main() {
 		fmt.Println()
 	}
 
+	// Struct
+
 	var object Person
 	object.name = "Lagger"
 	object.salary = 9000000
@@ -83,4 +85,16 @@ func main() {
 	}
 
 	fmt.Println(emp)
+
+	// Inline Struct
+
+	student := struct {
+		firstName  string
+		secondName string
+	}{
+		firstName:  "lagger",
+		secondName: "king",
+	}
+
+	fmt.Println(student)
 }
