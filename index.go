@@ -27,7 +27,16 @@ func main() {
 	msg := "one"
 	msg2 := "One"
 	fmt.Println(strings.Compare(msg, msg2))
+	// arrays
 	var arr1 = [6]int{1, 2, 3, 4, 5}
 	arr1[0] = 69
 	fmt.Println(arr1)
+	// slices
+	var arr2 = []int{1, 2, 3, 4, 5}
+	fmt.Println(arr2[:4])
+	fmt.Println(arr2[2:4])
+	fmt.Println(arr2[3:])
+
+	
+
 }
