@@ -10,6 +10,12 @@ var Rawfruit string = "Raw Mango"
 
 const a = 20
 
+type Person struct {
+	name    string
+	salary  int
+	address string
+}
+
 func main() {
 	ripeFruit := "Ripe Fruit"
 	fmt.Println(Rawfruit)
@@ -53,4 +59,10 @@ func main() {
 		fmt.Print(value)
 		fmt.Println()
 	}
+
+	var object Person
+	object.name = "Lagger"
+	object.salary = 9000000
+	object.address = "Hyderabad"
+	fmt.Println("Hello my name is", object.name, "living in", object.address, "with salary of", object.salary)
 }
