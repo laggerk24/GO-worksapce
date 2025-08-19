@@ -129,6 +129,22 @@ func main() {
 	fmt.Println("Defer Keyword")
 	greet()
 	greetWithDefer()
+
+	// Pointers
+	x := 35
+	var pointerToX *int = &x
+	fmt.Println(pointerToX)
+	fmt.Println("address of pointer", &pointerToX)
+	fmt.Println("Value at pointer", *pointerToX)
+
+	// panic --> like throw of other programs
+	ageVerification := func(age int) {
+		if age > 60 {
+			panic("Retirement age")
+		}
+	}
+	ageVerification(24)
+	ageVerification(60)
 }
 
 func (p Person) allDetails() string {
