@@ -102,7 +102,7 @@ func main() {
 	fmt.Println()
 	getAllNames("lagger", "Rahul", "aman")
 
-	fmt.Println(add(4, 5))
+	fmt.Println(addFunction(4, 5))
 
 	fmt.Println("Anonymous function ")
 	testFunc := func() {
@@ -117,6 +117,18 @@ func main() {
 
 	fmt.Println("Function with a struct")
 	fmt.Println(object.allDetails())
+
+	fmt.Println("Callback FUnction")
+	fmt.Println(addViaCallBack(69, 1, add))
+	fmt.Println(addViaCallBack(69, 2, addFunction))
+	fmt.Println(addViaCallBack(69, 2, func(num1 int, num2 int) int {
+		return num1 + num2
+	}))
+
+	// Defer Keyword
+	fmt.Println("Defer Keyword")
+	greet()
+	greetWithDefer()
 }
 
 func (p Person) allDetails() string {
@@ -137,6 +149,20 @@ func getAllNames(names ...string) {
 	}
 }
 
-func add(num1 int, num2 int) int {
+func addFunction(num1 int, num2 int) int {
 	return num1 + num2
+}
+
+func addViaCallBack(num1 int, num2 int, callback func(int, int) int) int {
+	return callback(num1, num2)
+}
+
+func greet() {
+	fmt.Println("World")
+	fmt.Println("Hello")
+}
+
+func greetWithDefer() {
+	defer fmt.Println("World")
+	fmt.Println("Hello")
 }
