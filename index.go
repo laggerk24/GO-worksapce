@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 )
 
@@ -185,6 +186,39 @@ func main() {
 		fmt.Println("Yo")
 		fmt.Println("Recieved from buffered channel", msg)
 	}
+
+	// WAIT group
+	var wg sync.WaitGroup
+	wg.Add(3)
+	go printMessage(&wg, "Lagger")
+	go printMessage(&wg, "Rahul")
+	go printMessage(&wg, "Aman")
+	wg.Wait()
+	fmt.Println("waiting complete ")
+
+	// SELECT
+	ch1 := make(chan string)
+	ch2 := make(chan string)
+
+	go func() {
+		time.Sleep(6 * time.Second)
+		ch1 <- "Message for ch1"
+	}()
+
+	go func() {
+		time.Sleep(7 * time.Second)
+		ch2 <- "Message for ch2"
+	}()
+
+	select {
+	case msg1 := <-ch1:
+		fmt.Println("Recieved", msg1)
+	case msg2 := <-ch2:
+		fmt.Println("Recieved", msg2)
+	case <-time.After(5 * time.Second):
+		fmt.Println("nothing received")
+	}
+
 }
 
 func (p Person) allDetails() string {
@@ -258,4 +292,9 @@ func goRoutine() {
 func sendData(ch chan<- int) {
 	time.Sleep(100 * time.Millisecond)
 	ch <- 29
+}
+
+func printMessage(wg *sync.WaitGroup, message string) {
+	defer wg.Done()
+	fmt.Println(message)
 }
