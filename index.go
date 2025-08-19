@@ -145,6 +145,10 @@ func main() {
 	}
 	ageVerification(24)
 	ageVerification(60)
+
+	// interface in Go
+	fmt.Println(log("test 123", DebugLogger{loggerType: "Debug"}))
+	fmt.Println(log("test 124", ErrorLogger{loggerType: "Error"}))
 }
 
 func (p Person) allDetails() string {
@@ -181,4 +185,29 @@ func greet() {
 func greetWithDefer() {
 	defer fmt.Println("World")
 	fmt.Println("Hello")
+}
+
+type Logger interface {
+	logMessage() string
+	// sayHi() string
+}
+
+type ErrorLogger struct {
+	loggerType string
+}
+
+type DebugLogger struct {
+	loggerType string
+}
+
+func (e ErrorLogger) logMessage() string {
+	return e.loggerType
+}
+
+func (d DebugLogger) logMessage() string {
+	return d.loggerType
+}
+
+func log(message string, logger Logger) string {
+	return logger.logMessage() + " " + message
 }
