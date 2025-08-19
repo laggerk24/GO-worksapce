@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 )
 
@@ -100,6 +101,26 @@ func main() {
 	test("lagger", 11, 2, 0, 4, 5, 0, 6, 10, 7, 9)
 	fmt.Println()
 	getAllNames("lagger", "Rahul", "aman")
+
+	fmt.Println(add(4, 5))
+
+	fmt.Println("Anonymous function ")
+	testFunc := func() {
+		fmt.Println("Expression")
+	}
+	testFunc()
+	add := func(num1 int, num2 int) int {
+		return num1 + num2
+	}
+
+	fmt.Println("Anonymous function output", add(3, 2))
+
+	fmt.Println("Function with a struct")
+	fmt.Println(object.allDetails())
+}
+
+func (p Person) allDetails() string {
+	return p.name + " " + strconv.Itoa(p.salary) + " " + p.address
 }
 
 func test(name string, numbers ...int) {
@@ -114,4 +135,8 @@ func getAllNames(names ...string) {
 	for name := range names {
 		fmt.Print(names[name], ",")
 	}
+}
+
+func add(num1 int, num2 int) int {
+	return num1 + num2
 }
