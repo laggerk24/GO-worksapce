@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+	"time"
 )
 
 var fruit = "Mango"
@@ -81,7 +82,7 @@ func main() {
 			salary:  900000000,
 			address: "Hyderabad",
 		},
-		id:            "BH10572",
+		id:            "180222",
 		officeAddress: "Hyderabad",
 	}
 
@@ -149,6 +150,41 @@ func main() {
 	// interface in Go
 	fmt.Println(log("test 123", DebugLogger{loggerType: "Debug"}))
 	fmt.Println(log("test 124", ErrorLogger{loggerType: "Error"}))
+
+	// go Routine
+	go goRoutine()
+	// time.Sleep(1 * time.Second)
+
+	// channels
+	fmt.Println()
+	ch := make(chan int) // --> this is unnuffered by default
+	go sendData(ch)
+	val := <-ch
+	fmt.Println("Channle data recieved", val)
+
+	// Unbuffered channel --> capacity of 0, syncronous communication b/n sender and reciever
+	// buffered channel --> specific capacity > 0
+	unBufferedCh := make(chan int)
+	bufferedCh := make(chan string, 2)
+	go func() {
+		bufferedCh <- "Ram Ram "
+		bufferedCh <- "Saryana"
+		close(bufferedCh)
+	}()
+	go func() {
+		unBufferedCh <- 23
+	}()
+
+	value := <-unBufferedCh
+	fmt.Println("Recieved from unbuffered channel", value)
+	valueBuffered := <-bufferedCh
+	fmt.Println("Recieved from buffered channel", valueBuffered)
+	// valueBuffered = <-bufferedCh
+	// fmt.Println("Recieved from buffered channel", valueBuffered)
+	for msg := range bufferedCh {
+		fmt.Println("Yo")
+		fmt.Println("Recieved from buffered channel", msg)
+	}
 }
 
 func (p Person) allDetails() string {
@@ -210,4 +246,16 @@ func (d DebugLogger) logMessage() string {
 
 func log(message string, logger Logger) string {
 	return logger.logMessage() + " " + message
+}
+
+func goRoutine() {
+	for i := 1; i <= 5; i++ {
+		time.Sleep(100 * time.Millisecond)
+		fmt.Printf("%d", i)
+	}
+}
+
+func sendData(ch chan<- int) {
+	time.Sleep(100 * time.Millisecond)
+	ch <- 29
 }
