@@ -158,7 +158,7 @@ func main() {
 
 	// channels
 	fmt.Println()
-	ch := make(chan int) // --> this is unnuffered by default
+	ch := make(chan int) // --> this is unnbuffered by default
 	go sendData(ch)
 	val := <-ch
 	fmt.Println("Channle data recieved", val)
@@ -190,9 +190,9 @@ func main() {
 	// WAIT group
 	var wg sync.WaitGroup
 	wg.Add(3)
-	go printMessage(&wg, "Lagger")
-	go printMessage(&wg, "Rahul")
-	go printMessage(&wg, "Aman")
+	go printMessage(&wg, "Lagger", 2)
+	go printMessage(&wg, "Rahul", 5)
+	go printMessage(&wg, "Aman", 6)
 	wg.Wait()
 	fmt.Println("waiting complete ")
 
@@ -294,7 +294,8 @@ func sendData(ch chan<- int) {
 	ch <- 29
 }
 
-func printMessage(wg *sync.WaitGroup, message string) {
+func printMessage(wg *sync.WaitGroup, message string, seconds int) {
 	defer wg.Done()
+	time.Sleep(time.Duration(seconds) * time.Second)
 	fmt.Println(message)
 }
